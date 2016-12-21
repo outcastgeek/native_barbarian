@@ -1,0 +1,6 @@
+[requires]
+zmqcpp/4.1.1@memsharded/stable
+Poco/1.7.3@lasote/stable
+
+[generators]
+cmake
