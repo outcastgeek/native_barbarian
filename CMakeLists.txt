@@ -7,8 +7,8 @@ message("generator is set to ${CMAKE_GENERATOR}")
 
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
-set(CMAKE_CXX_COMPILER clang++)
-set(CMAKE_C_COMPILER clang)
+# set(CMAKE_CXX_COMPILER clang++)
+# set(CMAKE_C_COMPILER clang)
 
 #set(CMAKE_CXX_COMPILER g++-6)
 #set(CMAKE_C_COMPILER gcc-6)
@@ -38,5 +38,11 @@ endif()
 
 conan_basic_setup()
 
-add_executable(timer timer.cpp)
+set(POCO_SRC ${CMAKE_SOURCE_DIR}/src/poco)
+add_executable(timer ${POCO_SRC}/timer.cpp)
 target_link_libraries(timer ${CONAN_LIBS})
+
+set(ZMQ_SRC ${CMAKE_SOURCE_DIR}/src/zmq)
+add_executable(hello_zmq ${ZMQ_SRC}/hello_zmq.cpp)
+target_link_libraries(hello_zmq ${CONAN_LIBS})
+
