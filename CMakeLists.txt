@@ -16,8 +16,16 @@ set(CMAKE_VERBOSE_MAKEFILE TRUE)
 #set(CMAKE_CXX_COMPILER /usr/local/bin/g++-6)
 #set(CMAKE_C_COMPILER /usr/local/bin/gcc-6)
 
+#set(CONAN_COMPILER gcc)
+#set(CONAN_COMPILER_VERSION 4.8)
+
+#set(CONAN_COMPILER clang)
+#set(CONAN_COMPILER_VERSION 8.0)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c11")
 
@@ -38,11 +46,12 @@ endif()
 
 conan_basic_setup()
 
+#### POCO
 set(POCO_SRC ${CMAKE_SOURCE_DIR}/src/poco)
 add_executable(timer ${POCO_SRC}/timer.cpp)
 target_link_libraries(timer ${CONAN_LIBS})
 
+#### ZMQ
 set(ZMQ_SRC ${CMAKE_SOURCE_DIR}/src/zmq)
 add_executable(hello_zmq ${ZMQ_SRC}/hello_zmq.cpp)
 target_link_libraries(hello_zmq ${CONAN_LIBS})
-
