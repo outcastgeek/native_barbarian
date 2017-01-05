@@ -1,6 +1,12 @@
 [requires]
 zmqcpp/4.1.1@memsharded/stable
 Poco/1.7.3@lasote/stable
+Boost/1.60.0@lasote/stable
+gRPC/1.1.0-dev@a_teammate/stable
+Protobuf/3.1.0@a_teammate/stable
 
 [generators]
 cmake
+
+[imports]
+bin, protoc* -> ./

@@ -46,6 +46,15 @@ endif()
 
 conan_basic_setup()
 
+add_subdirectory(proto)
+#include_directories(${CMAKE_CURRENT_BINARY_DIR/proto})
+include_directories(${CMAKE_BINARY_DIR}/proto)
+
+#### BOOST
+set(BOOST_SRC ${CMAKE_SOURCE_DIR}/src/boost)
+add_executable(main_boost ${BOOST_SRC}/main_boost.cpp)
+target_link_libraries(main_boost ${CONAN_LIBS})
+
 #### POCO
 set(POCO_SRC ${CMAKE_SOURCE_DIR}/src/poco)
 add_executable(timer ${POCO_SRC}/timer.cpp)
@@ -55,3 +64,10 @@ target_link_libraries(timer ${CONAN_LIBS})
 set(ZMQ_SRC ${CMAKE_SOURCE_DIR}/src/zmq)
 add_executable(hello_zmq ${ZMQ_SRC}/hello_zmq.cpp)
 target_link_libraries(hello_zmq ${CONAN_LIBS})
+
+#### ZMQ_PROTO
+set(ZMQ_PROTO_SRC ${CMAKE_SOURCE_DIR}/src/zmq_proto)
+add_executable(zmq_proto_server ${ZMQ_PROTO_SRC}/server.cpp)
+target_link_libraries(zmq_proto_server proto ${CONAN_LIBS})
+add_executable(zmq_proto_client ${ZMQ_PROTO_SRC}/client.cpp)
+target_link_libraries(zmq_proto_client proto ${CONAN_LIBS})
