@@ -1,0 +1,4 @@
+linux:
+  build: .
+  volumes:
+  - .:/workspace
