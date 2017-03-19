@@ -30,18 +30,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c11")
 
 execute_process(COMMAND conan install .. --build missing)
-#
-#if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/build/conanbuildinfo.cmake) #Clion, with conanbuildinfo.cmake in build folder
-#    include(${CMAKE_CURRENT_SOURCE_DIR}/build/conanbuildinfo.cmake)
-#else()
-#    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake) # Not CLion
-#endif()
 
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake) #Clion, with conanbuildinfo.cmake in #CMAKE_CURRENT_SOURCE_DIR folder
-    include(${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake)
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/build/conanbuildinfo.cmake) #Clion, with conanbuildinfo.cmake in build folder
+    include(${CMAKE_CURRENT_SOURCE_DIR}/build/conanbuildinfo.cmake)
 else()
     include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake) # Not CLion
 endif()
+
+#if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake) #Clion, with conanbuildinfo.cmake in #CMAKE_CURRENT_SOURCE_DIR folder
+#    include(${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake)
+#else()
+#    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake) # Not CLion
+#endif()
 
 
 conan_basic_setup()
@@ -49,6 +49,15 @@ conan_basic_setup()
 add_subdirectory(proto)
 #include_directories(${CMAKE_CURRENT_BINARY_DIR/proto})
 include_directories(${CMAKE_BINARY_DIR}/proto)
+
+#add_subdirectory(grpc_proto)
+##include_directories(${CMAKE_CURRENT_BINARY_DIR/grpc_proto})
+#include_directories(${CMAKE_BINARY_DIR}/grpc_proto)
+
+#### COOL
+set(COOL_SRC ${CMAKE_SOURCE_DIR}/src/cool)
+add_executable(cool ${COOL_SRC}/cool.cpp)
+target_link_libraries(cool ${CONAN_LIBS})
 
 #### BOOST
 set(BOOST_SRC ${CMAKE_SOURCE_DIR}/src/boost)
@@ -59,6 +68,14 @@ target_link_libraries(main_boost ${CONAN_LIBS})
 set(POCO_SRC ${CMAKE_SOURCE_DIR}/src/poco)
 add_executable(timer ${POCO_SRC}/timer.cpp)
 target_link_libraries(timer ${CONAN_LIBS})
+
+set(POCO_SRC ${CMAKE_SOURCE_DIR}/src/poco)
+add_executable(db_sqlite ${POCO_SRC}/db_sqlite.cpp)
+target_link_libraries(db_sqlite ${CONAN_LIBS})
+
+set(POCO_SRC ${CMAKE_SOURCE_DIR}/src/poco)
+add_executable(db_mysql ${POCO_SRC}/db_mysql.cpp)
+target_link_libraries(db_mysql ${CONAN_LIBS})
 
 #### ZMQ
 set(ZMQ_SRC ${CMAKE_SOURCE_DIR}/src/zmq)
@@ -71,3 +88,8 @@ add_executable(zmq_proto_server ${ZMQ_PROTO_SRC}/server.cpp)
 target_link_libraries(zmq_proto_server proto ${CONAN_LIBS})
 add_executable(zmq_proto_client ${ZMQ_PROTO_SRC}/client.cpp)
 target_link_libraries(zmq_proto_client proto ${CONAN_LIBS})
+
+#### GRPC_PROTO
+#set(GREETING_GPC_SRC ${CMAKE_SOURCE_DIR}/src/greeting_rpc)
+#add_executable(greeter_server ${GREETING_GPC_SRC}/greeter_server.cc)
+#target_link_libraries(greeter_server grpc_proto ${CONAN_LIBS})

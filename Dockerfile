@@ -1,4 +1,4 @@
-FROM ubuntu:16.10
+FROM ubuntu:17.04
 #FROM alpine:3.5
 
 MAINTAINER outcastgeek <outcastgeek+docker@gmail.com>
