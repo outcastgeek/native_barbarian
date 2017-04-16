@@ -1,8 +1,8 @@
-project(FoundationTimer)
+project(NativeBarbarian)
 cmake_minimum_required(VERSION 2.8.12)
 
 #cmake -G "Unix Makefiles" .
-#set(CMAKE_GENERATOR "Unix Makefiles")
+set(CMAKE_GENERATOR "Unix Makefiles")
 message("generator is set to ${CMAKE_GENERATOR}")
 
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
